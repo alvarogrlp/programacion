@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -148,8 +149,15 @@ public class OperacionesFicheros implements OperacionesInterfaces {
 
     @Override
     public Set<Empleado> empleadosPorPuesto(String puesto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'empleadosPorPuesto'");
+        Set<Empleado> empleados = read(fichero);
+        Iterator<Empleado> iterator = empleados.iterator();
+        while (iterator.hasNext()) {
+            Empleado empleadoIterador = iterator.next();
+            if (!empleadoIterador.getPuesto().equals(puesto)) {
+                iterator.remove();
+            }
+        }
+        return empleados;
     }
 
     @Override
